@@ -99,10 +99,12 @@ export function initCommunicationLayer({
     title = state.dappMetadata.name;
   }
 
+  const defaultDappId =
+    state.dappMetadata?.name ?? state.dappMetadata?.url ?? 'n/a';
   const dappId =
     typeof window !== 'undefined' && typeof window.location !== 'undefined'
-      ? window.location.hostname
-      : state.dappMetadata?.name ?? state.dappMetadata?.url ?? 'unkown';
+      ? window.location.hostname ?? defaultDappId
+      : defaultDappId;
 
   const originatorInfo: OriginatorInfo = {
     url,
