@@ -35,14 +35,15 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-deploy-test-dapp:
-    uses: ./.github/workflows/build-deploy-test-dapp.yml
+    name: Build, deploy, and test dapp
     needs: lint-build-test
+    uses: ./.github/workflows/build-deploy-test-dapp.yml
     with:
       s3_prefix: /${{ github.sha }}
       # TODO Change this
-      environment: 
-      build_name: 
-      aws_iam_role: 
+      environment:
+      build_name:
+      aws_iam_role:
       aws_region: ''
       s3_bucket: ''
       url: ''
@@ -56,7 +57,7 @@ jobs:
       webdapp-url: ''
       android-wallet-name: 'MM-QA-Wallet-Latest.apk'
       ios-wallet-name: 'MM-QA-Wallet-Latest.ipa'
-      
+
   is-release:
     name: Determine whether this is a release merge commit
     needs: lint-build-test
